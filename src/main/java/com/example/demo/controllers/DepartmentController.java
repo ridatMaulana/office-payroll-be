@@ -33,7 +33,7 @@ public class DepartmentController {
         return service.getId(id);
     }
 
-    @DeleteMapping("/edit/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<?> edit(@RequestBody AddDepartmentRequest request, @PathVariable String id){
         if (request.getName().isEmpty()){
 
@@ -43,5 +43,10 @@ public class DepartmentController {
             return ResponseEntity.badRequest().body(response);
         }
         return service.update(request, id);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable String id){
+        return service.delete(id);
     }
 }

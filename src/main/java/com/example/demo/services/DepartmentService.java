@@ -52,4 +52,19 @@ public class DepartmentService {
         }
         return ResponseEntity.badRequest().body(response);
     }
+
+    public ResponseEntity<?> delete(String id){
+        Response<Department> response = new Response<>();
+        try {
+            response.setResponseCode(ResponseCode.SUCCESS);
+            Department data = repository.findById(id).orElseThrow();
+            repository.delete(data);
+            return ResponseEntity.ok(response);
+        }catch (Exception e){
+            response.setResponseCode(ResponseCode.NO_DATA);
+            response.setMessage(e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+
+    }
 }
